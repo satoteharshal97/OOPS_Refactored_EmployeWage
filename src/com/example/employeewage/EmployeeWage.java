@@ -7,9 +7,27 @@ public class EmployeeWage {
 
 
     public static void main(String[] args) {
-        EmployeeWage getFullOrPart = new EmployeeWage();
-        System.out.println("Employee Wage :" + getFullOrPart.getFullOrPartTimeWage());
+        EmployeeWage switchFullOrPart = new EmployeeWage();
+        System.out.println("Employee Wage :" + switchFullOrPart.switchGetFullOrPartTimeWage());
     }
+
+    public int switchGetFullOrPartTimeWage() {
+        int empHours;
+        int empChecker = (int) Math.floor(Math.random() * 10) % 3;
+        switch (empChecker) {
+            case IS_FULL_TIME:
+                empHours = 8;
+                break;
+            case IS_PART_TIME:
+                empHours = 4;
+                break;
+            default:
+                empHours = 0;
+        }
+        return empHours * EMP_WAGE_PER_HOUR;
+    }
+
+
     public  int getFullOrPartTimeWage(){
         int empHours;
         int empWage;
