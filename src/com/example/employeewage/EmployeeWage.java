@@ -5,13 +5,36 @@ public class EmployeeWage {
     public static final int EMP_WAGE_PER_HOUR = 20;
     public static final int IS_PART_TIME = 2;
     public static final int NUM_OF_WORKING_DAYS = 20;
+    public static final int MAX_HOURS_FOR_MONTH = 100;
 
 
     public static void main(String[] args) {
         EmployeeWage switchFullOrPart = new EmployeeWage();
-        System.out.println("Employee Wage :" + switchFullOrPart.getMonthlyWage());
+        System.out.println("Employee Wage until condition :" + switchFullOrPart.getMonthlyWageCondition());
 
     }
+    public int getMonthlyWageCondition(){
+        int totalEmpHours = 0, totalWorkingDays = 0, empHours;
+
+        while (totalEmpHours <= MAX_HOURS_FOR_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS){
+            totalWorkingDays++;
+            int empChecker = (int)Math.floor(Math.random() * 10) % 3;
+            switch(empChecker){
+                case IS_FULL_TIME:
+                    empHours = 8;
+                    break;
+                case IS_PART_TIME:
+                    empHours = 4;
+                    break;
+                default:
+                    empHours = 0;
+            }
+            totalEmpHours = totalEmpHours + empHours;
+        }
+        int totalEmpWage = totalEmpHours * EMP_WAGE_PER_HOUR;
+        return totalEmpWage;
+    }
+
     public int getMonthlyWage(){
         int empHours, empWage, totalEmpWage = 0;
         for(int day = 1; day <= NUM_OF_WORKING_DAYS;  day++){
@@ -33,6 +56,7 @@ public class EmployeeWage {
         }
         return totalEmpWage;
     }
+
     public int switchGetFullOrPartTimeWage() {
         int empHours;
         int empChecker = (int) Math.floor(Math.random() * 10) % 3;
@@ -49,7 +73,6 @@ public class EmployeeWage {
         return empHours * EMP_WAGE_PER_HOUR;
     }
 
-
     public  int getFullOrPartTimeWage(){
         int empHours;
         double empChecker = (int)Math.floor(Math.random() * 10) % 3;
@@ -64,8 +87,8 @@ public class EmployeeWage {
             empHours = 0;
         }
         return empHours * EMP_WAGE_PER_HOUR;
-
     }
+
     public  int dailyWage(){
         int empHours;
         int empWage;
@@ -79,6 +102,7 @@ public class EmployeeWage {
         empWage = empHours * EMP_WAGE_PER_HOUR;
         return empWage;
     }
+
     static void checkAbsentOrPresent(){
         double empChecker = (int)Math.floor(Math.random() * 10) % 2;
         if(empChecker == IS_FULL_TIME) {
