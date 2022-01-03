@@ -6,15 +6,15 @@ public class EmployeeWage {
     public static final int IS_PART_TIME = 2;
     public static final int NUM_OF_WORKING_DAYS = 20;
     public static final int MAX_HOURS_FOR_MONTH = 100;
-
+    int totalEmpHours = 0, totalWorkingDays = 0, empHours;
 
     public static void main(String[] args) {
         EmployeeWage switchFullOrPart = new EmployeeWage();
-        System.out.println("Employee Wage until condition :" + switchFullOrPart.getMonthlyWageCondition());
+        System.out.println("Employee Wage until condition after using class variables :" + switchFullOrPart.getMonthlyWageCondition());
 
     }
     public int getMonthlyWageCondition(){
-        int totalEmpHours = 0, totalWorkingDays = 0, empHours;
+
 
         while (totalEmpHours <= MAX_HOURS_FOR_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS){
             totalWorkingDays++;
