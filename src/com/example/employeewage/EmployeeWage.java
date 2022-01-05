@@ -1,39 +1,18 @@
 package com.example.employeewage;
 
 public class EmployeeWage {
-    public static final int IS_FULL_TIME = 1;
-    public static final int IS_PART_TIME = 2;
-
-    int totalEmpHours = 0, totalWorkingDays = 0, totalEmpWage, empHours;
 
     public static void main(String[] args) {
-        EmployeeWage dmart = new EmployeeWage();
-        EmployeeWage reliance = new EmployeeWage();
-        EmployeeWage tcs = new EmployeeWage();
-        System.out.println(" For Dmart total employ wage: " + dmart.getMonthlyWage(8, 20, 100));
-        System.out.println(" For Reliance total employ wage: " + reliance.getMonthlyWage(6, 30, 150));
-        System.out.println(" For TCS total employ wage: " + tcs.getMonthlyWage(10, 26, 200));
+        ObjectOfEmployeeWageBuilder reliance = new ObjectOfEmployeeWageBuilder("Reliance Company", 6,
+                28, 120);
+        ObjectOfEmployeeWageBuilder dmart = new ObjectOfEmployeeWageBuilder("Dmart Company", 8,
+                26, 100);
+
+
+        dmart.EmployeeWageBuilder();
+        System.out.println(dmart);
+        reliance.EmployeeWageBuilder();
+        System.out.println(reliance);
     }
 
-    public int getMonthlyWage(int wagePerHour, int numberOfWorkingDays, int maxHours) {
-
-        while (totalEmpHours <= maxHours && totalWorkingDays < numberOfWorkingDays) {
-            int empChecker = (int) Math.floor(Math.random() * 10) % 3;
-            totalWorkingDays++;
-            switch (empChecker) {
-                case IS_FULL_TIME:
-                    empHours = 8;
-                    break;
-                case IS_PART_TIME:
-                    empHours = 4;
-                    break;
-                default:
-                    empHours = 0;
-            }
-            totalEmpHours = totalEmpHours + empHours;
-            System.out.println(" Days#: " + totalWorkingDays + " Emp Hour: " + empHours);
-        }
-        totalEmpWage = totalEmpHours * wagePerHour;
-        return totalEmpWage;
-    }
 }
