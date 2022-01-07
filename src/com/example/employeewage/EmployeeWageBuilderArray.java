@@ -1,6 +1,6 @@
 package com.example.employeewage;
 
-public class EmployeeWageBuilderArray {
+public class EmployeeWageBuilderArray implements InterfaceForEmployeeWageBuilder {
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
@@ -11,7 +11,9 @@ public class EmployeeWageBuilderArray {
         companyEmployeeWageArray = new CompanyEmployeeWage[5];
     }
 
-    private void addCompanyEmployeeWage(String company, int wagePerHour, int numberOfWorkingDays, int maxHours) {
+
+
+    public void addCompanyEmployeeWage(String company, int wagePerHour, int numberOfWorkingDays, int maxHours) {
         companyEmployeeWageArray[numberOfCompany] = new CompanyEmployeeWage(company, wagePerHour, numberOfWorkingDays, maxHours);
         numberOfCompany++;
     }
@@ -19,13 +21,13 @@ public class EmployeeWageBuilderArray {
 
     public void computeEmployeeWage() {
         for (int i = 0; i < numberOfCompany; i++) {
-            companyEmployeeWageArray[i].setTotalEmpWage(this.computeEmploeeWage(companyEmployeeWageArray[i]));
+            companyEmployeeWageArray[i].setTotalEmpWage(this.computeEmployeeWage(companyEmployeeWageArray[i]));
             System.out.println(companyEmployeeWageArray[i]);
         }
     }
 
-    private int computeEmploeeWage( CompanyEmployeeWage companyEmployeeWage) {
-        int totalEmpHours = 0, totalWorkingDays = 0, empHours = 0;
+    private int computeEmployeeWage( CompanyEmployeeWage companyEmployeeWage) {
+        int totalEmpHours = 0, totalWorkingDays = 0, empHours;
         while (totalEmpHours <= companyEmployeeWage.maxHours && totalWorkingDays < companyEmployeeWage.numberOfWorkingDays) {
             int empChecker = (int) Math.floor(Math.random() * 10) % 3;
             totalWorkingDays++;
