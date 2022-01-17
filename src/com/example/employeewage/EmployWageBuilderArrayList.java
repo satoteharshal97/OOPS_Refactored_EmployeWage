@@ -1,24 +1,32 @@
 package com.example.employeewage;
 import java.util.ArrayList;
 
+import java.util.*;
+
 public class EmployWageBuilderArrayList implements InterfaceForEmployeeWageBuilder {
+    public static final int IS_FULL_TIME = 1;
+    public static final int IS_PART_TIME = 2;
 
     private int numberOfCompany = 0;
     ArrayList<CompanyEmployeeWage> arrayList ;
-
+    private Map<String, CompanyEmployeeWage> companyHashMap;
 
     public EmployWageBuilderArrayList() {
         arrayList = new ArrayList<>();
+        companyHashMap = new HashMap<>() ;
     }
 
     public void addCompanyEmployeeWage(String company, int wagePerHour, int numberOfWorkingDays, int maxHours){
-        arrayList.add(numberOfCompany, new CompanyEmployeeWage(company, wagePerHour, numberOfWorkingDays, maxHours));
+        CompanyEmployeeWage computeEmployeeWage = new CompanyEmployeeWage(company, wagePerHour, numberOfWorkingDays, maxHours);
+        arrayList.add(computeEmployeeWage);
+        companyHashMap.put(company, computeEmployeeWage);
         numberOfCompany++;
     }
     public void computeEmployeeWage() {
         for (int i = 0; i < numberOfCompany; i++) {
-            arrayList.get(i).setTotalEmpWage(this.computeEmployeeWage(arrayList.get(i)));
-            System.out.println(arrayList.get(i));
+            CompanyEmployeeWage computeEmployeeWage = arrayList.get(i);
+            computeEmployeeWage.setTotalEmpWage(this.computeEmployeeWage(arrayList.get(i)));
+            System.out.println(computeEmployeeWage);
         }
     }
 
@@ -37,8 +45,10 @@ public class EmployWageBuilderArrayList implements InterfaceForEmployeeWageBuild
                 default:
                     empHours = 0;
             }
+            int empWage = computeEmployeeWage.wagePerHour * empHours;
             totalEmpHours = totalEmpHours + empHours;
-            System.out.println(" Days#: " + totalWorkingDays + " Emp Hour: " + empHours);
+            System.out.println(" Days#: " + totalWorkingDays +  " Emp Hour: " + empHours  + " Daily Employee Wage: " + empWage );
+
         }
         return totalEmpHours * computeEmployeeWage.wagePerHour;
     }
